@@ -4,7 +4,7 @@
     <title>OS Command Injection</title>
 </head>
 <body>
-    <form action="<?php echo $_SERVER['REQUEST_URI']?>" method="get">
+    <form method="get">
         IP: <input type="text" name="ip">
         <input type="submit" value="Ping" name="ping" id="ping">
         <h3 id="result"><?php ping()?></h3>
@@ -16,10 +16,9 @@
         if (isset($_GET['ping'])) {
             $ip = $_GET['ip'];
             $stdout = 0;
-            exec("ping -c 1 $ip", $output);
-            foreach ($output as $line) if(isset($line)) $stdout++;
-            if ($stdout >= 6) echo 'Resolved';
-            else echo 'Timeout';
+	        exec("ping -c 1 $ip", $output);
+            if (strstr($output[4], '0% packet loss')) exit ('Resolved');
+            exit ('Timeout');
         }
     }
 ?>
