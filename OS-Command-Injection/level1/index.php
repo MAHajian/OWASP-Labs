@@ -5,9 +5,9 @@
 </head>
 <body>
     <form action="/" method="get">
-        IP: <input type="text" name="ip">
-        <input type="submit" value="Ping" name="ping" id="ping">
-        <h3 id="result"><?php ping()?></h3>
+        IP: <input type="text" name="ip" style="margin-bottom: 4;">
+        <input type="submit" value="Ping" name="ping" id="ping"></br>
+        <span id="result"><?php ping()?></span>
     </form>
 </body>
 </html>
@@ -16,7 +16,7 @@
         if (isset($_GET['ping'])) {
             $ip = $_GET['ip'];
             exec("ping -c 1 $ip", $output);
-            foreach ($output as $line) echo $line;
+            foreach ($output as $line) echo $line.'</br>';
         }
     }
 ?>
