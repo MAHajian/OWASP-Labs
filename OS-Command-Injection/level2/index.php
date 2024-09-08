@@ -4,7 +4,7 @@
     <title>OS Command Injection</title>
 </head>
 <body>
-    <form action="/" method="get">
+    <form action="<?php echo $_SERVER['REQUEST_URI']?>" method="get">
         IP: <input type="text" name="ip">
         <input type="submit" value="Ping" name="ping" id="ping">
         <h3 id="result"><?php ping()?></h3>
