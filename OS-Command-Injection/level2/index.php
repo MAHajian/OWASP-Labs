@@ -15,8 +15,11 @@
     function ping() {
         if (isset($_GET['ping'])) {
             $ip = $_GET['ip'];
+            $stdout = 0;
             exec("ping -c 1 $ip", $output);
-            foreach ($output as $line) echo $line;
+            foreach ($output as $line) if(isset($line)) $stdout++;
+            if ($stdout >= 6) echo 'Resolved';
+            else echo 'Timeout';
         }
     }
 ?>
